@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Styles -->
+
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+</head>
+<style>
+    [x-cloak] {
+        display: none !important;
+    }
+</style>
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .active,
+    .dot:hover {
+        background-color: #717171;
+    }
+
+    .fade {
+        -webkit-animation-duration: 1.5s;
+        animation-duration: 1.5s;
+    }
+
+    @-webkit-keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    @keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    .nova-text {
+        font-size: 245px;
+    }
+</style>
+
+<body>
+    <div x-data="{ menuOpen: false }" class="custom-scrollbar">
+        <!-- start::Black overlay -->
+        <div :class="menuOpen ? 'block' : 'hidden'" @click="menuOpen = false"
+            class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
+        <!-- end::Black overlay -->
+
+
+
+
+        <!-- start::Menu -->
+        <div x-data="{ linkActive: false }" class="absolute top-0 right-0 z-10 w-full">
+            <!-- start::Main link -->
+            <div @click="linkActive = !linkActive" class="cursor-pointer">
+                <div class="w-full flex justify-end text-white">
+                    <div class="w-1/4 bg-blue-500 flex justify-between items-center p-3 rounded-bl-lg">
+                        <a href="/index.html"><img src="../public/assets/img/BogoImage/bogoImg/images/LOGO (1).png"
+                                alt=""></a>
+                        <div class="flex items-center">
+                            <button class="flex items-center">
+                                <i class="fa fa-bars"></i>
+                                <p class="text-xl hidden ml-3 sm:block">Menu</p>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end::Main link -->
+
+            <!-- start::Submenu -->
+            <div x-show="linkActive" @click.away="linkActive = false" x-cloak
+                class="absolute right-0 w-full h-screen bg-blue-600 top-0 z-20 text-white">
+                <div class="w-full flex justify-end text-white">
+                    <div class="w-1/4 flex justify-between items-center p-3">
+                        <div class=""></div>
+                        <div class="flex items-center">
+                            <button class="flex items-center">
+                                <i class="fa fa-close"></i>
+                                <p class="text-xl hidden ml-3 sm:block" @click.away="linkHover = true"
+                                    @mouseleave="linkHover = false" @click="linkActive = !linkActive">Menu</p>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="flex justify-around absolute top-1/4 w-full">
+                    <a href="">Logo</a>
+                    <div class="">
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Bikes</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Frames</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Parts</a></li>
+                    </div>
+                    <div class="">
+                        <li class="list-none my-4 "><a href="" class="text-3xl">About us</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Warranty</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Research & Development</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">FAQs</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">News</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Contact</a></li>
+                    </div>
+                </div>
+            </div>
+            <!-- end::Submenu -->
+        </div>
+        <!-- end::Topbar -->
+
+        <!-- start:Bogo Inside Bike -->
+        <div class="">
+            <div class="lg:container px-5 mx-auto py-24">
+                <h1 class="text-7xl">NOVA</h1>
+                <div class="mySlides fade">
+                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/Rectangle (1).png" class="" alt="">
+                </div>
+                <div class="mySlides fade">
+                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/bikeSketch1.png" class="" alt="">
+                </div>
+                <div class="mySlides fade">
+                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/bikeSketch.png" class="" alt="">
+                </div>
+                <div class="text-center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+                <div class="text-center pb-28 pt-4">
+                    <a class="px-2" onclick="plusSlides(-1)"><i class="text-3xl ti-arrow-circle-left"></i></a>
+                    <a class="px-2" onclick="plusSlides(1)"><i class="text-3xl ti-arrow-circle-right"></i></a>
+                </div>
+                <div class="lg:flex">
+                    <p class="lg:uppercase text-2xl leading-7 lg:leading-loose p-5">Bringing WETHEPEOPLE quality to
+                        a lower
+                        price
+                        point for 2021 is our entry-level shredding machine that is available in five incredible
+                        colourways and
+                        two toptube options. The Nova features a super short 12.75” oval chainstay and responsive
+                        26mm offset
+                        fork allowing it to not only feel just like the bikes our PRO team ride, but also make it
+                        much easier to
+                        progress your riding even further.</p>
+                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/circleImg.png" alt="">
+                </div>
+                <div class="flex items-center justify-center">
+                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/frame.png" alt="">
+                </div>
+            </div>
+
+            <div class="grid justify-items-end py-20">
+                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/leg.png" class="lg:w-10/12" alt="">
+            </div>
+
+            <div class="flex overflow-hidden gap-24 lg:-ml-64">
+                <h1 class="nova-text tracking-widest">NOVA</h1>
+                <h1 class="nova-text tracking-widest">NOVA</h1>
+                <h1 class="nova-text tracking-widest">NOVA</h1>
+            </div>
+
+            <div class="container px-5 mx-auto py-14">
+                <div class="">
+                    <h1 class="text-3xl lg:text-6xl pb-2 uppercase">click image for gallery</h1>
+                    <div class="justify-between">
+                        <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                            <div class="">
+                                <a href="">
+
+                                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/gallery.png"
+                                        class="w-full lg:max-w-none" alt="">
+                                </a>
+                                <div class="">
+                                    <p class="text-center uppercase text-lg">MATT BLACK (20”TT)</p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <a href="">
+
+                                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/gallery.png"
+                                        class="w-full lg:max-w-none" alt="">
+                                </a>
+                                <div class="">
+                                    <p class="text-center uppercase text-lg">LASER GREEN (20” TT)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                            <div class="">
+                                <a href="">
+
+                                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/gallery.png"
+                                        class="w-full lg:max-w-none" alt="">
+                                </a>
+                                <div class="">
+                                    <p class="text-center uppercase text-lg">ULTRA VIOLET (20” TT)</p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <a href="">
+
+                                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/gallery.png"
+                                        class="w-full lg:max-w-none" alt="">
+                                </a>
+                                <div class="">
+                                    <p class="text-center uppercase text-lg">ULTRA VIOLET (20” TT)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <div>
+                                <a href="">
+                                    <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/gallery.png"
+                                        class="w-full" alt="">
+                                </a>
+                                <div class="grid justify-items-center">
+                                    <p class="text-center uppercase text-lg">ULTRA VIOLET (20” TT)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mx-auto w-3/4">
+                    <!-- specifications -->
+                    <div class="py-20" x-data="{open:false}">
+                        <button @click="open = true" class="w-full pb-16 border-b-2">
+                            <div class="flex justify-between">
+                                <p class="text-4xl">SPECIFICATIONS</p>
+                                <span class="text-4xl">+</span>
+                            </div>
+                        </button>
+                        <div class="" x-show="open" @click.away="open=false"
+                            x-transition:enter-start="transition ease-in duration-3000">
+                            <div class="border-b-2  w-full flex justify-between py-5">
+                                <p class="uppercase">FRAME:</p>
+                                <p class="uppercase">WETHEPEOPLE "NOVA" frame, 1020 hi-ten</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">FORK:</p>
+                                <p class="uppercase">SALT "AM 20" fork, 1020 hi-ten , 4130 crmo steerer, 26mm offset
+                                </p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">BARS:</p>
+                                <p class="uppercase">SALT "NOVA" bar, 1020 hi-ten</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">Grips:</p>
+                                <p class="uppercase">SALT "EX" grips, 154mm, flangless</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">STEM:</p>
+                                <p class="uppercase">SALT "PRO" frontload stem, 50mm reach</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">HEADSET:</p>
+                                <p class="uppercase">SALT "PRO" int. headset, sealed bearing</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">GYRO:</p>
+                                <p class="uppercase">holes for removable gyro tabs</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">LEVER:</p>
+                                <p class="uppercase">SALT "AM" brake lever, alloy</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">BRAKES:</p>
+                                <p class="uppercase">SALTPLUS "GEO XL" alloy u-brake-rear</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">CRANKS:</p>
+                                <p class="uppercase">SALT "ROOKIE" tubular 3pc crank, crmo, 165mm, 8 spline</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">BB:</p>
+                                <p class="uppercase">SALT "MID" bb, 19mm, press fit, sealed bearing</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">PEDALS:</p>
+                                <p class="uppercase">ÉCLAT "SLASH" pedals, nylon/fiberglass</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">CHAIN:</p>
+                                <p class="uppercase">SALT "AM" chain, Z1 type</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">SPROCKET:</p>
+                                <p class="uppercase">SALT "GATEWAY" sprocket, steel, 25t</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">FRONT HUB:</p>
+                                <p class="uppercase">SALT "NOVA" hub, alloy, loose ball, 3/8"s axle, 36h</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">REAR HUB:</p>
+                                <p class="uppercase">SALT "NOVA" cassette hub, semi sealed, 9t, 14mm axle, 36h</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">HUBGUARDS:</p>
+                                <p class="uppercase"></p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">FRONT RIM:</p>
+                                <p class="uppercase">SALT "BEAM" rim, single wall, 36h</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">REAR RIM:</p>
+                                <p class="uppercase">SALT "BEAM" rim, single wall, 36h</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">SEAT:</p>
+                                <p class="uppercase">WETHEPEOPLE "NOVA" combo seat, mid padded</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">SEAT POST:</p>
+                                <p class="uppercase"></p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">SEAT CLAMP:</p>
+                                <p class="uppercase">ÉCLAT "PURE" seat clamp, 6061-T6 forged alloy</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">TIRES:</p>
+                                <p class="uppercase">SALT "TRACER" tires, 2.35", front & rear</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">PEGS:</p>
+                                <p class="uppercase"></p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">WEIGHT:</p>
+                                <p class="uppercase">TBC kg / TBC lbs</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">COLORS:</p>
+                                <p class="uppercase">matt black, 20.5"TT / matt raw, 20.5"TT / -</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Geometry -->
+                    <div class="" x-data="{open:false}">
+                        <button @click="open = true" class="w-full pb-16 border-b-2">
+                            <div class="flex justify-between">
+                                <p class="text-4xl">GEOMETRY</p>
+                                <span class="text-4xl">+</span>
+                            </div>
+                        </button>
+                        <div class="" x-show="open" @click.away="open=false"
+                            x-transition:enter-start="transition ease-in duration-3000">
+
+                            <p class="text-4xl py-5">FRAME</p>
+                            <div class="border-b-2  w-full flex justify-between py-5">
+                                <p class="uppercase">A - TOP TUBE LENGTH:</p>
+                                <p class="uppercase">20.5"</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">B - CHAIN STAY LENGTH:</p>
+                                <p class="uppercase">12.75"</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">C - HEAD TUBE ANGLE:</p>
+                                <p class="uppercase">75°</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">D - SEAT TUBE ANGLE:</p>
+                                <p class="uppercase">71.5°</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">E - BB HEIGHT:</p>
+                                <p class="uppercase">11.75°</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">F - STANDOVER HEIGHT:</p>
+                                <p class="uppercase">8.38"</p>
+                            </div>
+                            <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/bikeSketch.png" class=""
+                                alt="">
+
+                            <p class="text-4xl py-5 uppercase">handler bar</p>
+                            <div class="border-b-2  w-full flex justify-between py-5">
+                                <p class="uppercase">G - BAR RISE:</p>
+                                <p class="uppercase">8.85"</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">H - BAR WIDTH:</p>
+                                <p class="uppercase">29"</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">I - BAR BACK SWEEP:</p>
+                                <p class="uppercase">11°</p>
+                            </div>
+                            <div class="border-b-2 w-full flex justify-between py-5">
+                                <p class="uppercase">J - BAR UP SWEEP:</p>
+                                <p class="uppercase">2°</p>
+                            </div>
+                            <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/bikeSketch1.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/halfBike.png" class="py-6 lg:w-10/12" alt="">
+            <div class="relative  overflow-hidden">
+                <div class="hidden lg:flex absolute right-36 top-36">
+                    <div class="Btn-prev px-2"><a><i class="text-3xl ti-arrow-circle-left"></i></a></div>
+                    <div class="Btn-next px-2"><a><i class="text-3xl ti-arrow-circle-right"></i></a></div>
+                </div>
+                <p class="text-6xl whitespace-nowrap lg:px-20 uppercase py-20">more bikes</p>
+                <div class="swiper relative py-10 overflow-hidden">
+                    <div class="swiper-wrapper flex">
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <a href="" class="">
+                                <img src="../public/assets/img/BogoImage/bogoImg/NovaBikes/novaBike.png"
+                                    class="w-full max-w-none" alt="">
+                                <p class="text-center">NOVA</p>
+                                <p class="text-center">The most stacked entry level BMX bike on the market?</p>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination hidden lg:block"></div>
+                    <!-- Add Arrows -->
+                </div>
+            </div>
+        </div>
+        <!-- End:Bogo Inside Bike -->
+
+        <!-- Start:: Shop Now-->
+        <div class="fixed z-40 right-6 bottom-10">
+            <button class="px-5 py-1 bg-white border-blue-800 border-2 rounded-full"><a
+                    href="./bogoShopBikes.html" class="text-xl text-blue-700">Shop Now</a></button>
+        </div>
+        <!-- End:: Shop Now -->
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="bg-gray-800 text-white p-5">
+            <div class="lg:container mx-auto lg:px-16 xl:px-40">
+                <div class="lg:flex w-full justify-between pt-5">
+                    <div class="pt-6">
+                        <img src="../TailwindCSS-Alpine.js-Template/public/assets/img/bogoImg/images/LOGO (1).png"
+                            class="w-1/2 mx-auto lg:w-full" alt="">
+                        <p class="pt-4 pb-3 text-left">Subcribe to our weekly Email Newsletters</p>
+                        <div class="flex items-center lg:max-w-md mx-auto bg-white rounded-full ">
+                            <div class="w-full">
+                                <input type="email"
+                                    class="w-full px-4 py-1 text-gray-900 rounded-full focus:outline-none"
+                                    placeholder="name@gmail.com">
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="flex items-center bg-gray-500 justify-center w-12 h-12 text-white rounded-full">
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="lg:flex">
+                        <div class="mt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">Bikes</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul class="text-left">
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Classical Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">City Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Race Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">MTB Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">20<sup>o</sup> Bikes</a>
+                                    </li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Fixie Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Kid Bikes</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5">
+                        </div>
+                        <div class="lg:px-20 pt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">Frames</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul class="text-left">
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hyperios</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hemera</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hercules</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Klassiko</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Okeanos</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Cupido</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5 ">
+                        </div>
+                        <div class="pt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">About</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">About us</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Warranty</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Research & Development</a>
+                                    </li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">FAQs</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">News</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Contact</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5 ">
+                        </div>
+
+                    </div>
+                    <div class="hidden lg:block pt-5">
+                        <a class="p-3 h-2 w-2 rounded-full bg-white cursor-pointer"><i
+                                class="fa-arrow-up text-xl text-black"></i></a>
+                    </div>
+                </div>
+                <div class="lg:flex justify-between">
+                    <nav class="relative pb-2">
+                        <ul class="flex">
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="fa-facebook"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="fa-linkedin"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="fa-twitter-alt"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="fa-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <hr class="lg:hidden">
+
+                    <div class="flex lg:justify-between relative">
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/amdIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/atmIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/paypalIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/visaIcon.png" alt=""></a>
+                    </div>
+                </div>
+                <hr class="mx-auto relative">
+                <div class="flex pt-5">
+                    <img src="../public/assets/img/BogoImage/bogoImg/images/vietnamIcon.png" alt="">
+                    <p class="pl-2">Vietnam</p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <!-- slider -->
+
+
+    <!-- dot bike & slider bike-->
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
+
+    <!-- dot bike & slider bike-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            centeredSlides: true,
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.Btn-next',
+                prevEl: '.Btn-prev',
+            },
+        });
+    </script>
+</body>
+
+</html>

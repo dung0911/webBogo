@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet" />
+
+
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+
+    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<style>
+    [x-cloak] {
+        display: none !important;
+    }
+
+    /* <!-- Scroll --> */
+
+    .swiper-scrollbar {
+        height: 2px;
+    }
+
+    .swiper-wrapper {
+        height: auto;
+    }
+
+
+    .swiper-container-horizontal>.swiper-scrollbar {
+        position: relative;
+        left: 0;
+        bottom: 3px;
+        z-index: 40;
+        height: 2px;
+        width: 100%;
+    }
+
+    .swiper-scrollbar-drag {
+        width: 12%;
+        border: 3px solid black;
+        top: -2px;
+    }
+</style>
+
+<body>
+    <div x-data="{ menuOpen: false }" class="custom-scrollbar">
+        <!-- start::Black overlay -->
+        <div :class="menuOpen ? 'block' : 'hidden'" @click="menuOpen = false"
+            class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
+        <!-- end::Black overlay -->
+
+
+
+
+        <!-- start::Menu -->
+        <div x-data="{ linkActive: false }" class="absolute top-0 right-0 z-10 w-full">
+            <!-- start::Main link -->
+            <div @click="linkActive = !linkActive" class="cursor-pointer">
+                <div class="w-full flex justify-end text-white">
+                    <div class="w-1/4 bg-blue-500 flex justify-between items-center p-3 rounded-bl-lg">
+                        <a href="/index.html"><img src="../public/assets/img/BogoImage/bogoImg/images/LOGO (1).png"
+                                alt=""></a>
+                        <div class="flex items-center">
+                            <button class="flex items-center">
+                                <i class="fa fa-bars"></i>
+                                <p class="text-xl hidden ml-3 sm:block">Menu</p>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end::Main link -->
+
+            <!-- start::Submenu -->
+            <div x-show="linkActive" @click.away="linkActive = false" x-cloak
+                class="absolute right-0 w-full h-screen bg-blue-600 top-0 z-20 text-white">
+                <div class="w-full flex justify-end text-white">
+                    <div class="w-1/4 flex justify-between items-center p-3">
+                        <div class=""></div>
+                        <div class="flex items-center">
+                            <button class="flex items-center">
+                                <i class="fa fa-close"></i>
+                                <p class="text-xl hidden ml-3 sm:block" @click.away="linkHover = true"
+                                    @mouseleave="linkHover = false" @click="linkActive = !linkActive">Menu</p>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="flex justify-around absolute top-1/4 w-full">
+                    <a href="">Logo</a>
+                    <div class="">
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Bikes</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Frames</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Parts</a></li>
+                    </div>
+                    <div class="">
+                        <li class="list-none my-4 "><a href="" class="text-3xl">About us</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Warranty</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Research & Development</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">FAQs</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">News</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Contact</a></li>
+                    </div>
+                </div>
+            </div>
+            <!-- end::Submenu -->
+        </div>
+        <!-- end::Topbar -->
+
+        <!-- start::main -->
+        <div class="">
+            <div class=" sm:pt-20 pt-8  relative bg-gray-300">
+                <div class="flex">
+                    <nav class="text-gray-500  flex items-center mx-2">
+                        <ul>
+                            <li class="my-1"><a href="" class="pl-2 hover:text-gray-700"><i
+                                        class="fa fa-facebook-f"></i></a>
+                            </li>
+                            <li class="my-1"><a href="" class="pl-2 hover:text-gray-700"><i
+                                        class="fa fa-linkedin"></i></a>
+                            </li>
+                            <li class="my-1"><a href="" class="pl-2 hover:text-gray-700"><i
+                                        class="fa fa-twitter"></i></a>
+                            </li>
+                            <li class="my-1"><a href="" class="pl-2 hover:text-gray-700"><i
+                                        class="fa fa-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <img src="../public/assets/img/BogoImage/bogoImg/images/firstimg.png" class="" style="width:96%"
+                        alt="">
+
+                </div>
+
+                <!-- Circle -->
+                <div class="flex">
+                    <button class="flex p-6 md:pl-12 cursor-pointer " onclick="lightbox_open();">
+                        <img src="../public/assets/img/BogoImage/bogoImg/images/bicycle.png" alt=""
+                            class="border border-gray-600 p-2 rounded-full">
+                        <div class="ml-8 mt-5">
+                            <p class="leading-relaxed text-left text-lg">Watch</p>
+                            <p class="leading-relaxed text-left text-sm">The Eco-making of Bogo</p>
+                            <p class="leading-relaxed text-left text-sm">Bamboo Bikes</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div id="fade" onClick="lightbox_close();"></div>
+            <section class="lightbox-main-wrapper " id="light">
+                <div class="video-wrap">
+                    <a class="close" id="boxclose" onclick="lightbox_close();"></a>
+                    <video class="lightbox-vid-player lozad loaded" id="VisaChipCardVideo" controls preload="none"
+                        loop="true"
+                        data-content-src="https://player.vimeo.com/external/574034322.hd.mp4?s=383a371d73af9960b350d4ff54944e7b9d348932&amp;profile_id=175"
+                        data-poster="" data-loaded="true">
+                        <source
+                            src="https://player.vimeo.com/external/574034322.hd.mp4?s=383a371d73af9960b350d4ff54944e7b9d348932&amp;profile_id=175"
+                            type="video/mp4">
+                    </video>
+                </div>
+            </section>
+
+            <!-- Scroll -->
+            <div class="relative overflow-hidden  h-auto w-full  multColor">
+                <div class="swiper1 relative px-[10vw] lg:px-[20vw] cursor-grab overflow-hidden">
+                    <div class="swiper-wrapper pb-10">
+                        <div class="swiper-slide">
+                            <a href="">
+                                <div class=" border">
+                                    <img class="object-cover w-full"
+                                        src="../public/assets/img/BogoImage/bogoImg/images/scroll/newimg1.png" alt="" />
+                                    <div class=" relative p-4 flex flex-col justify-between items-start">
+                                        <div>
+                                            <p class="text-lg">
+                                                Bogo Set to Launch in Singapore as a Moves Towards Sustainable
+                                                Transportation
+                                            </p>
+                                            <p class="py-7">June 30, 2021 — Cities, Events</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="">
+                                <div class=" border">
+                                    <img class="object-cover w-full"
+                                        src="../public/assets/img/BogoImage/bogoImg/images/scroll/newimg1.png" alt="" />
+                                    <div class=" relative  p-4 flex flex-col justify-between items-start">
+                                        <div>
+                                            <p class="text-lg">
+                                                Bogo Set to Launch in Singapore as a Moves Towards Sustainable
+                                                Transportation
+                                            </p>
+                                            <p class="py-7">June 30, 2021 — Cities, Events</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="">
+                                <div class=" border">
+                                    <img class="object-cover w-full"
+                                        src="../public/assets/img/BogoImage/bogoImg/images/scroll/newimg1.png" alt="" />
+                                    <div class=" relative  p-4 flex flex-col justify-between items-start">
+                                        <div>
+                                            <p class="text-lg">
+                                                Bogo Set to Launch in Singapore as a Moves Towards Sustainable
+                                                Transportation
+                                            </p>
+                                            <p class="py-7">June 30, 2021 — Cities, Events</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="">
+                                <div class=" border">
+                                    <img class="object-cover w-full"
+                                        src="../public/assets/img/BogoImage/bogoImg/images/scroll/newimg1.png" alt="" />
+                                    <div class=" relative  p-4 flex flex-col justify-between items-start">
+                                        <div>
+                                            <p class="text-lg">
+                                                Bogo Set to Launch in Singapore as a Moves Towards Sustainable
+                                                Transportation
+                                            </p>
+                                            <p class="py-7">June 30, 2021 — Cities, Events</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="">
+                                <div class=" border">
+                                    <img class="object-cover w-full"
+                                        src="../public/assets/img/BogoImage/bogoImg/images/scroll/newimg1.png" alt="" />
+                                    <div class=" relative  p-4 flex flex-col justify-between items-start">
+                                        <div>
+                                            <p class="text-lg">
+                                                Bogo Set to Launch in Singapore as a Moves Towards Sustainable
+                                                Transportation
+                                            </p>
+                                            <p class="py-7">June 30, 2021 — Cities, Events</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="">
+                                <div class=" border">
+                                    <img class="object-cover w-full"
+                                        src="../public/assets/img/BogoImage/bogoImg/images/scroll/newimg1.png" alt="" />
+                                    <div class=" relative  p-4 flex flex-col justify-between items-start">
+                                        <div>
+                                            <p class="text-lg">
+                                                Bogo Set to Launch in Singapore as a Moves Towards Sustainable
+                                                Transportation
+                                            </p>
+                                            <p class="py-7">June 30, 2021 — Cities, Events</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-scrollbar my-5 cursor-grab hidden lg:block"></div>
+                    <!-- Add Arrows -->
+                </div>
+            </div>
+
+            <!-- Slider -->
+            <div class="flex lg:h-screen w-full relative">
+                <div class="relative  mr-7 pl-5 lg:block ">
+                    <div class="top-1/2 absolute">
+                        <a class="cursor-pointer Btn-prev"> <i class="text-3xl text-blue-600 fa fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                <div class="slider-container px-10 w-full relative">
+                    <div class="relative overflow-hidden w-full lg:w-5/6 h-4/5 top-0">
+                        <div class="swiper relative overflow-hidden swiper-container1">
+                            <div class="swiper-wrapper flex">
+                                <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                                    <div class="">
+                                        <img src="../public/assets/img/BogoImage/bogoImg/images/slider/UNimg1.png"
+                                            class="w-full max-w-none" alt="">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                                    <div class="">
+                                        <img src="../public/assets/img/BogoImage/bogoImg/images/slider/UNimg2.png"
+                                            class="w-full max-w-none" alt="">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                                    <div class="">
+                                        <img src="../public/assets/img/BogoImage/bogoImg/images/slider/UNimg1.png"
+                                            class="w-full max-w-none" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="absolute right-0 bottom-0 hidden lg:block w-full" style="width: 500px;">
+                        <div class="relative overflow-hidden lg:w-5/6 h-4/5 top-0 left-0">
+                            <div class="swiper relative  overflow-hidden swiper-container2">
+                                <div class="swiper-wrapper flex">
+                                    <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                                        <div class="">
+                                            <img src="../public/assets/img/BogoImage/bogoImg/images/slider/UNimg2.png"
+                                                class="w-full max-w-none" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                                        <div class="">
+                                            <img src="../public/assets/img/BogoImage/bogoImg/images/slider/UNimg1.png"
+                                                class="w-full max-w-none" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                                        <div class="">
+                                            <img src="../public/assets/img/BogoImage/bogoImg/images/slider/UNimg2.png"
+                                                class="w-full max-w-none" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative  lg:block">
+                    <div class="top-1/2 absolute pr-5 right-0">
+                        <a class="cursor-pointer Btn-next"><i class="text-3xl text-blue-600 fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bike -->
+            <div class="slideshow-container h-full">
+                <div id="whiteBike" class="swiper relative overflow-hidden swiper-container10">
+                    <div class="swiper-wrapper flex w-full h-screen">
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/Bikes/whiteBike/fb70b1bc-0cec-43af-acce-062887611ca3_white-driveside.png"
+                                alt="" />
+                            <div class="">
+                                <span class="cursor-pointer absolute firstPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-krex6u">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </span>
+
+                                <span class="cursor-pointer absolute secondPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-1dnnzqi">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute thirdPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-aes1p8">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute fourPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-7z7c50"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/Bikes/whiteBike/1a6872b8-bddb-46b4-b688-b74074331cbf_white-rear.png"
+                                alt="" /></div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden"> <img
+                                src="../public/assets/img/BogoImage/bogoImg/images/Bikes/whiteBike/e2e41dd3-92a7-4312-ac92-9e4b359d4519_white-front.png"
+                                alt="" /></div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/Bikes/whiteBike/18309095-dfbb-422a-8a8f-6f9c34d4f531_white-45.png"
+                                alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: none;" id="redBike" class="swiper relative overflow-hidden swiper-container10">
+                    <div class="swiper-wrapper flex w-full h-screen">
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/redBike/c4fad6fe-5eff-4c7b-9e6e-d078166db9c2_lobsterred-driveside.png"
+                                alt="" />
+                            <div class="">
+
+                                <span class="cursor-pointer absolute firstPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-6hx69t"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </span>
+
+                                <span class="cursor-pointer absolute secondPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-1akiagn"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute thirdPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-1hj3rci"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute fourPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-z7iqgl"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/redBike/cd42f7bb-89fa-43ac-a644-7b609abdf9fe_lobsterred-rear.png"
+                                alt="" />
+                        </div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/redBike/cd42f7bb-89fa-43ac-a644-7b609abdf9fe_lobsterred-rear (1).png"
+                                alt="" />
+                        </div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/redBike/6bf97729-9f44-4594-a946-8d884f660e45_lobsterred-45.png"
+                                alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: none;" id="grayBike" class="swiper relative overflow-hidden swiper-container10">
+                    <div class="swiper-wrapper flex w-full h-screen" id="GrayBike">
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/grayBike/86ad7226-b94f-4839-a0c3-76394d9b931e_beluga-driveside.png"
+                                alt="" />
+                            <div class="">
+
+                                <span class="cursor-pointer absolute firstPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-h1dzaj"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </span>
+
+                                <span class="cursor-pointer absolute secondPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-f0yamn"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute thirdPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-ke9svl"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute fourPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-jisheh"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/grayBike/5fc7f235-004e-41a1-8e63-c22934a3fb0e_beluga-rear.png"
+                                alt="" />
+                        </div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/grayBike/c5ff5777-a716-480e-a97c-51a58edbbd79_beluga-front.png"
+                                alt="" />
+                        </div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/grayBike/f91bf752-0bad-426c-90ab-444753220283_beluga-45.png"
+                                alt="" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="display: none;" id="blackBike" class="swiper relative overflow-hidden swiper-container10">
+                    <div class="swiper-wrapper flex w-full h-screen" id="BlackBike">
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/BlackBike/7601c48c-9203-4d9b-9681-ba38241fc92e_guide-grey-side-new.png"
+                                alt="" />
+                            <div class="">
+
+                                <span class="cursor-pointer absolute firstPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-1wmps5x"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </span>
+
+                                <span class="cursor-pointer absolute secondPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-1njptqm"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute thirdPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-lbqll1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute fourPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-1enqktm"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/BlackBike/d162fdfa-6158-42e0-b823-34d2390866da_guide-grey-rear-new.png"
+                                alt="" />
+                        </div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/BlackBike/39c1c262-c8f7-493b-acdf-8ed80a840eeb_guide-grey-front-new.png"
+                                alt="" />
+                        </div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/BlackBike/ed702a56-6929-463c-b102-d1eb728fa9af_guide-grey-34-new.png"
+                                alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: none;" id="blurGrayBike"
+                    class="swiper relative overflow-hidden swiper-container10">
+                    <div class="swiper-wrapper flex w-full h-screen" id="BlurGrayBike">
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/BlurGrayBike/ff26bcf9-796c-4d25-b32c-5030ce432a60_guide-snow-side-new.png"
+                                alt="" />
+                            <div class="">
+
+                                <span class="cursor-pointer absolute firstPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-uxb82f"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </span>
+
+                                <span class="cursor-pointer absolute secondPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-xkp81v"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute thirdPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-38rf5s"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <span class="cursor-pointer absolute fourPlus">
+                                    <div id="Driveside-0-0" class="css-16v7eit">
+                                        <div class="css-16almvy"></div><svg width="22" height="22" viewBox="0 0 22 22"
+                                            fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.0001 0C10.4478 0 10.0001 0.447716 10.0001 1V9.99988H1C0.447715 9.99988 0 10.4476 0 10.9999C0 11.5522 0.447716 11.9999 1 11.9999H10.0001V21C10.0001 21.5523 10.4478 22 11.0001 22C11.5523 22 12.0001 21.5523 12.0001 21V11.9999H21C21.5523 11.9999 22 11.5522 22 10.9999C22 10.4476 21.5523 9.99988 21 9.99988H12.0001V1C12.0001 0.447715 11.5523 0 11.0001 0Z"
+                                                fill="url(#paint0_linear)"></path>
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="9.39187e-07" y1="4.61291"
+                                                    x2="14.2188" y2="-0.218365" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#9A24FC"></stop>
+                                                    <stop offset="0.527079" stop-color="#5F39E2"></stop>
+                                                    <stop offset="1" stop-color="#078EDE"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <div class="thumbnail-wrapper css-zhgd8">
+                                            <div class="inner-wrapper css-1yj5hzd">
+                                                <div class="css-1psz476"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/BlurGrayBike/7e4a67e7-2ffa-414e-816a-229dfd707841_guide-snow-rear-new.png"
+                                alt="" />
+                        </div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/BlurGrayBike/98a51d47-9ec2-4f68-beec-d28567102d45_guide-snow-front-new.png"
+                                alt="" />
+                        </div>
+
+                        <div class="swiper-slide flex-shrink-0 overflow-hidden">
+                            <img src="../public/assets/img/BogoImage/bogoImg/images/Bikes/BlurGrayBike/73dbe785-cdbc-40c4-9bae-71272cd1179f_guide-snow-34-new.png"
+                                alt="" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="swiper-pagination pt-3 swiper-pagination-clickable swiper-pagination-bullets">
+                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+                        aria-label="Go to slide 1">DRIVESIDE</span>
+                    <span class="swiper-pagination-bullet" tabindex="0" role="button"
+                        aria-label="Go to slide 2">REAR</span>
+                    <span class="swiper-pagination-bullet" tabindex="0" role="button"
+                        aria-label="Go to slide 3">FRONT</span>
+                    <span class="swiper-pagination-bullet" tabindex="0" role="button"
+                        aria-label="Go to slide 4">3/4</span>
+                </div>
+                <div class="relative mx-12">
+                    <div class="relative flex" id="myDIV">
+                        <button onclick="toggleVisibility('whiteBike');"
+                            class="p-1 rounded-full mr-2 border-2 border-gray-300 btn active">
+                            <div class="bg-white w-8 h-8 border-inherit mx-auto border-gray-300 rounded-full"></div>
+                        </button>
+                        <button onclick="toggleVisibility('redBike');"
+                            class="p-1 rounded-full mr-2 border-2 border-gray-300 btn">
+                            <div class="bgTwo w-8 h-8 border-inherit mx-auto border-gray-300 rounded-full"></div>
+                        </button>
+                        <button onclick="toggleVisibility('grayBike');"
+                            class="p-1 rounded-full mr-2 border-2 border-gray-300 btn">
+                            <div class="bgThree w-8 h-8 border-inherit mx-auto border-gray-300 rounded-full"></div>
+                        </button>
+                        <button onclick="toggleVisibility('blackBike');"
+                            class="p-1 rounded-full mr-2 border-2 border-gray-300 btn">
+                            <div class="bgFour w-8 h-8 border-inherit mx-auto border-gray-300 rounded-full"></div>
+                        </button>
+                        <button onclick="toggleVisibility('blurGrayBike');"
+                            class="p-1 rounded-full mr-2 border-2 border-gray-300 btn">
+                            <div class="bgFive w-8 h-8 border-inherit mx-auto border-gray-300 rounded-full"></div>
+                        </button>
+                    </div>
+
+                    <button class="border-none">
+                        <h6
+                            class="specHover font-bold uppercase leading-6 tracking-widest mt-5 text-xl relative whitespace-nowrap">
+                            see the specs</h6>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- four squares -->
+            <div class="container mx-auto p-10">
+                <div class="lg:flex">
+                    <div class="lg:w-1/2 m-3">
+                        <a href="">
+                            <div class="card-zoom relative flex items-center justify-center overflow-hidden h-80 mb-3">
+                                <div class="card-zoom-image absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover "
+                                    style="background-image:url('../public/assets/img/BogoImage/bogoImg/images/4squares/square1.png');">
+                                </div>
+                                <div
+                                    class="dark_theme absolute left-0 top-0 bottom-0 right-0 flex overflow-hidden px-0 bg-transparent h-auto items-center justify-center">
+                                    <div
+                                        class="pl-4 absolute hover-trigger uppercase leading-loose top-3/4 left-0 text-5xl text-white transition-transform duration-700 ease-out transform hover:-translate-y-16 w-full">
+                                        BIKES
+                                        <div
+                                            class="hover-target absolute transition-transform duration-1000 ease-out transform uppercase text-2xl whitespace-nowrap group-hover:opacity-100">
+                                            the latest collections
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div
+                                class="card-zoom relative flex items-center justify-center overflow-hidden lg:w-2/3 w-full h-96 mt-3 float-right mb-6 lg:pb-0">
+                                <div class="card-zoom-image absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover"
+                                    style="background-image:url('../public/assets/img/BogoImage/bogoImg/images/4squares/square3.png');">
+                                </div>
+                                <div
+                                    class="dark_theme  absolute left-0 top-0 bottom-0 right-0 flex overflow-hidden px-0 bg-transparent h-auto items-center justify-center">
+                                    <div
+                                        class="pl-4 absolute hover-trigger uppercase leading-loose top-3/4 left-0 text-5xl text-white transition-transform duration-700 ease-out transform hover:-translate-y-16 w-full">
+                                        PARTS
+                                        <div
+                                            class="hover-target absolute transition-transform duration-1000 ease-out transform uppercase text-2xl whitespace-nowrap group-hover:opacity-100">
+                                            the latest collections
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="lg:w-1/2 m-3">
+                        <a href="">
+                            <div
+                                class="card-zoom relative flex items-center justify-center overflow-hidden lg:w-2/3 w-full h-96">
+                                <div class="card-zoom-image absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover object-cover"
+                                    style="background-image:url('../public/assets/img/BogoImage/bogoImg/images/4squares/square2.png');">
+                                </div>
+                                <div
+                                    class="dark_theme  absolute left-0 top-0 bottom-0 right-0 flex overflow-hidden px-0 bg-transparent h-auto items-center justify-center">
+                                    <div
+                                        class="pl-4 absolute hover-trigger uppercase leading-loose top-3/4 left-0 text-5xl text-white transition-transform duration-700 ease-out transform hover:-translate-y-16 w-full">
+                                        FRAMES
+                                        <div
+                                            class="hover-target absolute transition-transform duration-1000 ease-out transform uppercase text-2xl whitespace-nowrap group-hover:opacity-100">
+                                            the latest collections
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="card-zoom relative flex items-center justify-center overflow-hidden mt-6 h-80">
+                                <div class="card-zoom-image absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover "
+                                    style="background-image:url('../public/assets/img/BogoImage/bogoImg/images/4squares/square4.png');">
+                                </div>
+                                <div
+                                    class="dark_theme  absolute left-0 top-0 bottom-0 right-0 flex overflow-hidden px-0 bg-transparent h-auto items-center justify-center">
+                                    <div
+                                        class="pl-4 absolute hover-trigger uppercase leading-loose top-3/4 left-0 text-5xl text-white transition-transform duration-700 ease-out transform hover:-translate-y-16 w-full">
+                                        TEAM
+                                        <div
+                                            class="hover-target absolute transition-transform duration-1000 ease-out transform uppercase text-2xl whitespace-nowrap group-hover:opacity-100">
+                                            the latest collections
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- tailwind Carousel -->
+            <div class="swiper-container relative overflow-hidden w-full cursor-grab py-10 bg-gray-300">
+                <div class="swiper-wrapper flex flex-nowrap py-4 w-full">
+
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-shrink-0 overflow-hidden opacity-25">
+                        <div class="px-6" style="width: 430px;">
+                            <h5 class="text-3xl">“The carbon frame and sporty handlebars make the bike feel agile, too“
+                            </h5>
+                            <a rel="noopener noreferrer"><img
+                                    src="https://images.prismic.io/gogoro-eeyo/4bd12e66-c86e-49a8-a6df-30786ff8fb17_engadget-logo.svg?auto=compress,format"
+                                    class="w-2/5 pt-8"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- end:main -->
+
+        <!-- Start:: Shop Now-->
+        <div class="fixed z-40 right-6 bottom-10">
+            <button class="px-5 py-1 bg-white border-blue-800 border-2 rounded-full">
+                <a href="./bogoShopBikes.html" class="text-xl text-blue-700">Shop Now</a>
+            </button>
+        </div>
+        <!-- End:: Shop Now -->
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="bg-gray-800 text-white p-5">
+            <div class="lg:container mx-auto lg:px-16 xl:px-40">
+                <div class="lg:flex w-full justify-between pt-5">
+                    <div class="pt-6">
+                        <img src="../TailwindCSS-Alpine.js-Template/public/assets/img/bogoImg/images/LOGO (1).png"
+                            class="w-1/2 mx-auto lg:w-full" alt="">
+                        <p class="pt-4 pb-3 text-left">Subcribe to our weekly Email Newsletters</p>
+                        <div class="flex items-center lg:max-w-md mx-auto bg-white rounded-full ">
+                            <div class="w-full">
+                                <input type="email"
+                                    class="w-full px-4 py-1 text-gray-900 rounded-full focus:outline-none"
+                                    placeholder="name@gmail.com">
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="flex items-center bg-gray-500 justify-center w-12 h-12 text-white rounded-full">
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="lg:flex">
+                        <div class="mt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">Bikes</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul class="text-left">
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Classical Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">City Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Race Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">MTB Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">20<sup>o</sup> Bikes</a>
+                                    </li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Fixie Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Kid Bikes</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5">
+                        </div>
+                        <div class="lg:px-20 pt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">Frames</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul class="text-left">
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hyperios</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hemera</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hercules</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Klassiko</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Okeanos</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Cupido</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5 ">
+                        </div>
+                        <div class="pt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">About</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">About us</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Warranty</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Research & Development</a>
+                                    </li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">FAQs</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">News</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Contact</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5 ">
+                        </div>
+
+                    </div>
+                    <div class="hidden lg:block pt-5">
+                        <a class="p-3 h-2 w-2 rounded-full bg-white cursor-pointer"><i
+                                class="fa-arrow-up text-xl text-black"></i></a>
+                    </div>
+                </div>
+                <div class="lg:flex justify-between">
+                    <nav class="relative pb-2">
+                        <ul class="flex">
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="fa-facebook"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="fa-linkedin"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="fa-twitter-alt"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="fa-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <hr class="lg:hidden">
+
+                    <div class="flex lg:justify-between relative">
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/amdIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/atmIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/paypalIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/visaIcon.png" alt=""></a>
+                    </div>
+                </div>
+                <hr class="mx-auto relative">
+                <div class="flex pt-5">
+                    <img src="../public/assets/img/BogoImage/bogoImg/images/vietnamIcon.png" alt="">
+                    <p class="pl-2">Vietnam</p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- js Carousel -->
+    <script>
+        var swiper1 = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            loop: true,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+        });
+
+    </script>
+    <script src="../js/jsVid.js"></script>
+    <script src="../js/jsScroll.js"></script>
+    <script src="../js/jsSlider.js"></script>
+    <script src="../js/jsBike.js"></script>
+
+</body>
+
+</html>

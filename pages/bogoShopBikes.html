@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet" />
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+
+    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    [x-cloak] {
+        display: none !important;
+    }
+</style>
+
+<body>
+    <div x-data="{ menuOpen: false }" class="flex custom-scrollbar">
+        <!-- start::Black overlay -->
+        <div :class="menuOpen ? 'block' : 'hidden'" @click="menuOpen = false"
+            class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
+        <!-- end::Black overlay -->
+
+
+
+
+        <!-- start::Menu -->
+        <div x-data="{ linkActive: false }" class="absolute top-0 right-0 z-10 w-full">
+            <!-- start::Main link -->
+            <div @click="linkActive = !linkActive" class="cursor-pointer">
+                <div class="w-full flex justify-end text-white">
+                    <div class="w-1/4 bg-blue-500 flex justify-between items-center p-3 rounded-bl-lg">
+                        <a href="/index.html"><img src="../public/assets/img/BogoImage/bogoImg/images/LOGO (1).png"
+                                alt=""></a>
+                        <div class="flex items-center">
+                            <button class="flex items-center">
+                                <i class="fa fa-bars"></i>
+                                <p class="text-xl hidden ml-3 sm:block">Menu</p>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end::Main link -->
+
+            <!-- start::Submenu -->
+            <div x-show="linkActive" @click.away="linkActive = false" x-cloak
+                class="absolute right-0 w-full h-screen bg-blue-600 top-0 z-20 text-white">
+                <div class="w-full flex justify-end text-white">
+                    <div class="w-1/4 flex justify-between items-center p-3">
+                        <div class=""></div>
+                        <div class="flex items-center">
+                            <button class="flex items-center">
+                                <i class="fa fa-close"></i>
+                                <p class="text-xl hidden ml-3 sm:block" @click.away="linkHover = true"
+                                    @mouseleave="linkHover = false" @click="linkActive = !linkActive">Menu</p>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="flex justify-around absolute top-1/4 w-full">
+                    <a href="">Logo</a>
+                    <div class="">
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Bikes</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Frames</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Parts</a></li>
+                    </div>
+                    <div class="">
+                        <li class="list-none my-4 "><a href="" class="text-3xl">About us</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Warranty</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Research & Development</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">FAQs</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">News</a></li>
+                        <li class="list-none my-4 "><a href="" class="text-3xl">Contact</a></li>
+                    </div>
+                </div>
+            </div>
+            <!-- end::Submenu -->
+        </div>
+        <!-- end::Topbar -->
+        <!-- Start:: Shop Now-->
+        <!-- Shop Now -->
+        <div class="fixed z-40 right-6 bottom-10">
+            <button class="px-5 py-1 bg-white border-blue-800 border-2 rounded-full"><a
+                    href="../pages/bogoShopBikes.html" class="text-xl text-blue-700">Shop Now</a></button>
+        </div>
+        <!-- End:: Shop Now -->
+    </div>
+
+    <!-- start:bogoShopBikes -->
+    <div class="">
+        <!-- Side navbar -->
+        <div class="lg:fixed top-1/4 right-12 text-right hidden lg:block">
+            <nav>
+                <h1 class="underline text-3xl pb-4">BIKES</h1>
+                <ul class="">
+                    <li class="py-2"><a href="#classicalBikes" class="text-xl">Classical Bikes</a></li>
+                    <li class="py-2"><a href="#cityBikes" class="text-xl">City Bikes</a></li>
+                    <li class="py-2"><a href="#raceBikes" class="text-xl">Race Bikes</a></li>
+                    <li class="py-2"><a href="#" class="text-xl">MTB Bikes</a></li>
+                    <li class="py-2"><a href="#" class="text-xl">20'' Bikes</a></li>
+                    <li class="py-2"><a href="#" class="text-xl">Fixie Bikes</a></li>
+                    <li class="py-2"><a href="#" class="text-xl">Kid Bikes</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Bikes -->
+        <div class="container mx-auto p-5 lg:pt-56 lg:pl-16">
+            <div class="lg:w-3/4 w-full pb-14">
+                <h1 class="text-2xl italic lg:text-7xl lg:pb-12 pb-4">BIKES</h1>
+                <p class="uppercase text-sm lg:text-2xl leading-8 lg:leading-loose">
+                    "Innovation and creativity collide
+                    this
+                    season, as
+                    Wethepeople release
+                    the hugely anticipated 2021 collection of complete bikes. This time around, we have made a
+                    significant leap to
+                    deliver a truly new generation of complete bikes that not only use ground-breaking and radical
+                    design features
+                    but aim to feel exactly like a custom build bike should. Every rider deserves to have the best
+                    available
+                    options
+                    from a series of complete bikes and that is something we have always prided ourselves on. This year
+                    is no
+                    different and we made sure that no one is left out."</p>
+            </div>
+            <div class="pb-14" id="classicalBikes">
+                <h1 class="text-3xl lg:text-6xl pb-2 uppercase whitespace-nowrap  italic">Classical bikes</h1>
+                <div class="justify-between lg:w-3/4">
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">NOVA</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">The most stacked entry level BMX
+                                    bike on the market?
+                                </p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">CRS 20“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">A staple of the line, the CRS is a
+                                    bike we are proud
+                                    to carry the
+                                    WETHEPEOPLE stamp of approval.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">CRS FC 20“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">A full freecoaster upgrade on our
+                                    legendary CRS
+                                    complete.</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">ARCADE</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">The perfect mid-tier bike. The
+                                    Arcade comes in your
+                                    choice of a
+                                    20.5” or 21” toptube.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">JUSTICE</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">Redesigned and reimagined for 2021.
+                                    The Justice is a
+                                    modern-day
+                                    street machine.</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">REASON</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">Forwards or backwards, the Reason
+                                    comes with
+                                    everything you need
+                                    to wage war on the streets.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">CRYSIS</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">The Crysis is a high-performance
+                                    machine designed to
+                                    shred on any
+                                    surface.</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">VERSUS</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">The Versus is an unstoppable skate
+                                    park machine with
+                                    all the
+                                    equipment to match.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">TRUST CS</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">The “full package”. The Trust is one
+                                    hell of a bike.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">TRUST FC</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">A new-school street build with a
+                                    subtle hint of
+                                    old-school
+                                    flavour.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">BATTLESHIP</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">The pinnacle of BMX technology. The
+                                    ultimate street
+                                    setup.</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">REVOLVER</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">A bike of quality, craftmanship and
+                                    style.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="lg:w-1/2">
+                            <a href="./bogoInsideBike.html">
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">ENVY</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">The best BMX bike ever made? What
+                                    more needs saying?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pb-14" id="cityBikes">
+                <h1 class="text-3xl  lg:text-6xl pb-2 uppercase  italic">city bikes</h1>
+                <div class="justify-between lg:w-2/3">
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/citybikes/Rectangle (1).png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">PRIME 12“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">Start them shredding from day one.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/citybikes/Rectangle (1).png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">RIOT 14“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">Meet the new guy. Our first 14”
+                                    complete.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/citybikes/Rectangle (1).png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">SEED 16“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">A carefully designed and well spec’d
+                                    16” bike,
+                                    designed to take
+                                    you as far as you’re willing to push it.</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/citybikes/Rectangle (1).png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">CRS 18“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">This incredible 18” machine has
+                                    everything you could
+                                    need before
+                                    you’re ready to move to a full size BMX bike.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="lg:w-1/2">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/citybikes/Rectangle (1).png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">CRS FS 18“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">A skatepark-shredding machine built
+                                    for younger riders
+                                    who need a
+                                    bike without compromise.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pb-14" id="raceBikes">
+                <h1 class="text-3xl lg:text-6xl pb-2 uppercase  italic">race bikes</h1>
+                <div class="justify-between lg:w-2/3">
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/racebikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">ATLAS 24“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">Weather you’re down the trails, at
+                                    the pump track or
+                                    just heading
+                                    into the city, the Atlas is so much fun to ride, you’ll have hard time putting it
+                                    down.</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/racebikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">AUDIO 22“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">A game changer and leader of the 22”
+                                    movement.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col gap-4">
+                        <div class="lg:w-1/2">
+                            <a href="./bogoInsideBike.html">
+
+                                <img src="../public/assets/img/BogoImage/bogoImg/imageShopBikes/racebikes/Rectangle.png"
+                                    class="w-full lg:max-w-none" alt="">
+                            </a>
+                            <div class="">
+                                <p class="text-center uppercase text-sm lg:text-lg">AVENGER 27.5“</p>
+                                <p class="text-center uppercase text-sm lg:text-lg">Our hybrid clunker machine mixes the
+                                    old with the new.
+                                    Big wheels
+                                    = big fun.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:bogoShopBikes -->
+
+    <!-- footer -->
+    <footer>
+        <div class="bg-gray-800 text-white p-5">
+            <div class="lg:container mx-auto lg:px-16 xl:px-40">
+                <div class="lg:flex w-full justify-between pt-5">
+                    <div class="pt-6">
+                        <img src=".../TailwindCSS-Alpine.js-Template/public/assets/img../public/assets/img/BogoImage/bogoImg/images/LOGO (1).png"
+                            class="w-1/2 mx-auto lg:w-full" alt="">
+                        <p class="pt-4 pb-3 text-left">Subcribe to our weekly Email Newsletters</p>
+                        <div class="flex items-center lg:max-w-md mx-auto bg-white rounded-full ">
+                            <div class="w-full">
+                                <input type="email"
+                                    class="w-full px-4 py-1 text-gray-900 rounded-full focus:outline-none"
+                                    placeholder="name@gmail.com">
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="flex items-center bg-gray-500 justify-center w-12 h-12 text-white rounded-full">
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="lg:flex">
+                        <div class="mt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">Bikes</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul class="text-left">
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Classical Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">City Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Race Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">MTB Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">20<sup>o</sup> Bikes</a>
+                                    </li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Fixie Bikes</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Kid Bikes</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5">
+                        </div>
+                        <div class="lg:px-20 pt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">Frames</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul class="text-left">
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hyperios</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hemera</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Hercules</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Klassiko</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Okeanos</a></li>
+                                    <li class="py-2"><a href="" class="whitespace-nowrap">Cupido</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5 ">
+                        </div>
+                        <div class="pt-5">
+                            <button class="relative w-full  focus:outline-none" id="bikeBtn">
+                                <div class="flex justify-between w-full">
+                                    <p class="text-2xl">About</p>
+                                    <span class="lg:hidden">+</span>
+                                </div>
+                            </button>
+                            <div class="hidden lg:block top-full min-w-full w-max" id="dropdown">
+                                <ul>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">About us</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Warranty</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Research & Development</a>
+                                    </li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">FAQs</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">News</a></li>
+                                    <li class="py-2"><a class="whitespace-nowrap" href="">Contact</a></li>
+                                </ul>
+                            </div>
+                            <hr class="lg:hidden mt-5 ">
+                        </div>
+
+                    </div>
+                    <div class="hidden lg:block pt-5">
+                        <a class="px-2 py-1 rounded-full bg-white text-black cursor-pointer">
+                            <i class="fa fa-arrow-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:flex justify-between">
+                    <nav class="relative pb-2">
+                        <ul class="flex">
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="ti-facebook"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="ti-linkedin"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="ti-twitter-alt"></i></a>
+                            </li>
+                            <li class="p-2"><a href="" class="hover:text-gray-700"><i class="ti-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <hr class="lg:hidden">
+
+                    <div class="flex lg:justify-between relative">
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/amdIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/atmIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/paypalIcon.png" alt=""></a>
+                        <a href="" class="px-1"><img
+                                src="../public/assets/img/BogoImage/bogoImg/images/purchase/visaIcon.png" alt=""></a>
+                    </div>
+                </div>
+                <hr class="mx-auto relative">
+                <div class="flex pt-5">
+                    <img src="../public/assets/img/BogoImage/bogoImg/images/vietnamIcon.png" alt="">
+                    <p class="pl-2">Vietnam</p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>
