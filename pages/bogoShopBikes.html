@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
-
     <!-- Styles -->
     <link rel="stylesheet" href="../css/tailwind.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -11,8 +9,6 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-
-
     <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,13 +21,8 @@
 
 <body>
     <div x-data="{ menuOpen: false }" class="flex custom-scrollbar">
-        <!-- start::Black overlay -->
         <div :class="menuOpen ? 'block' : 'hidden'" @click="menuOpen = false"
             class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
-        <!-- end::Black overlay -->
-
-
-
 
         <!-- start::Menu -->
         <div x-data="{ linkActive: false }" class="absolute top-0 right-0 z-10 w-full">
@@ -71,7 +62,9 @@
                 </div>
 
                 <div class="flex justify-around absolute top-1/4 w-full">
-                    <a href="">Logo</a>
+                    <a href="/index.html">
+                        <img src="../public/assets/img/BogoImage/bogoImg/images/LOGO (1).png" alt="">
+                    </a>
                     <div class="">
                         <li class="list-none my-4 "><a href="" class="text-3xl">Bikes</a></li>
                         <li class="list-none my-4 "><a href="" class="text-3xl">Frames</a></li>
@@ -89,9 +82,8 @@
             </div>
             <!-- end::Submenu -->
         </div>
-        <!-- end::Topbar -->
+
         <!-- Start:: Shop Now-->
-        <!-- Shop Now -->
         <div class="fixed z-40 right-6 bottom-10">
             <button class="px-5 py-1 bg-white border-blue-800 border-2 rounded-full"><a
                     href="../pages/bogoShopBikes.html" class="text-xl text-blue-700">Shop Now</a></button>
