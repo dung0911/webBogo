@@ -383,7 +383,7 @@ section.lightbox-main-wrapper a.close {
 }
 
 section.lightbox-main-wrapper a.close {
-  background: url("/bogoImg/images/close-icon.svg") no-repeat 50%;
+  background: url("../public/assets/img/BogoImage/bogoImg/images/close-icon.svg") no-repeat 50%;
   background-size: 80% auto;
   width: 6vw;
   height: 6vw;
